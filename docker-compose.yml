@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:latest
+    container_name: my_postgres_container
+    environment:
+      POSTGRES_DB: djangocore_new
+      POSTGRES_USER: salik
+      POSTGRES_PASSWORD: salik
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  # pgAdmin
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: my_pgadmin_container
+    environment:
+      PGADMIN_DEFAULT_EMAIL: mdsaifsalik@yahoo.com
+      PGADMIN_DEFAULT_PASSWORD: salik
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
+
+volumes:
+  postgres_data:
+  pgadmin_data:
+
